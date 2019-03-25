@@ -19,7 +19,7 @@
 <div class="m-block-header" id="div-header">
     <strong id="m-title">填写收货地址</strong>
     <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
-    <a href="/" class="m-index-icon">保存</a>
+    <a href="javascript:;"  id="submits" class="m-index-icon">保存</a>
 </div>
 <div class=""></div>
 <!-- <form class="layui-form" action="">
@@ -29,13 +29,29 @@
 <form class="layui-form" action="">
     <div class="addrcon">
         <ul>
-            <li><em>收货人</em><input type="text" placeholder="请填写真实姓名"></li>
-            <li><em>手机号码</em><input type="number" placeholder="请输入手机号"></li>
-            <li><em>所在区域</em><input type="number" placeholder="请输入所在区域"></li>
-            <li class="addr-detail"><em>详细地址</em><input type="text" placeholder="20个字以内" class="addr"></li>
+            <li>
+                <font style="font-size: 18px">收货人</font><em></em>
+                <input type="text" id="address_name" placeholder="请填写真实姓名" style="height:30px;font-size: 18px">
+            </li>
+            <li>
+                <font style="font-size: 18px">手机号码</font><em></em>
+                <input type="number" id="address_tel" placeholder="请输入手机号" style="height:30px;font-size: 18px">
+            </li>
+            <li>
+                <font style="font-size: 18px">邮编</font><em></em>
+                <input type="number" id="address_mail" placeholder="请输入邮编" style="height:30px;font-size: 18px">
+            </li>
+            <li class="addr-detail">
+                <font style="font-size: 18px">详细地址</font><em></em>
+                <input type="text" placeholder="20个字以内" id="address_desc" style="height:30px;font-size: 18px">
+            </li>
         </ul>
-        <div class="setnormal"><span>设为默认地址</span><input type="checkbox" name="xxx" lay-skin="switch">  </div>
+        <div class="setnormal">
+            <span><font style="font-size: 18px">设为默认地址</font></span>
+            <input type="checkbox" id="address_default" lay-skin="switch">
+        </div>
     </div>
+    <input type="hidden" id="_token" value="{{csrf_token()}}">
 </form>
 
 <!-- SUI mobile -->
@@ -46,70 +62,69 @@
 <script src="{{url('layui/layui.js')}}"></script>
 
 <script>
-    //Demo
-    layui.use('form', function(){
-        var form = layui.form();
-
-        //监听提交
-        form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
-            return false;
+    $(function(){
+        $(".footer").attr('style','display:none');
+        layui.use(['form','layer'], function(){
+            var form = layui.form();
+            var layer = layui.layer;
+            $("#submits").click(function(){
+                var obj={};
+                obj._token=$("#_token").val();
+                obj.address_name=$("#address_name").val();
+                obj.address_tel=$("#address_tel").val();
+                obj.address_desc=$("#address_desc").val();
+                obj.address_mail=$("#address_mail").val();
+                var address_default=$("#address_default").prop('checked');
+                if(address_default==true){
+                    obj.address_default=1;
+                }else{
+                    obj.address_default=2;
+                }
+                $.post(
+                    "{{url('address/addressadd')}}",
+                    obj,
+                    function(res){
+                        if(res.code==1){
+                            layer.msg(res.font,{icon:res.code,time:2000},function () {
+                                location.href="{{url('address/address')}}";
+                            });
+                        }
+                        layer.msg(res.font,{icon:res.code});
+                    },'json'
+                )
+            })
+            {{--//域的内容改变--}}
+            {{--form.on('select', function(data){--}}
+            {{--var id=data.value; //得到被选中的值--}}
+            {{--var _this=$(this);--}}
+            {{--var _token=$("#_token").val();--}}
+            {{--var _option="<option value=''>--请选择--</option>";--}}
+            {{--_this.nextAll('select').html(_option);--}}
+            {{--$.post(--}}
+            {{--"{{url('addressajax')}}",--}}
+            {{--{id:id,_token:_token},--}}
+            {{--function(res){--}}
+            {{--if(res.code==1){--}}
+            {{--for(var i in res['areaInfo']){--}}
+            {{--_option+="<option value="+res['areaInfo'][i]['id']+">"+res['areaInfo'][i]['name']+"</option>"--}}
+            {{--}--}}
+            {{--console.log(_option);--}}
+            {{--_this.next('div').html(_option);--}}
+            {{--_this.nextAll('select');--}}
+            {{--}else{--}}
+            {{--layer.msg(res.font,{icon:res.code});--}}
+            {{--}--}}
+            {{--},'json'--}}
+            {{--)--}}
+            {{--});--}}
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
         });
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    var area = new LArea();
-    area.init({
-        'trigger': '#demo1',//触发选择控件的文本框，同时选择完毕后name属性输出到该位置
-        'valueTo':'#value1',//选择完毕后id属性输出到该位置
-        'keys':{id:'id',name:'name'},//绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
-        'type':1,//数据源类型
-        'data':LAreaData//数据源
-    });
-
-
+    })
 </script>
-
 
 </body>
 </html>

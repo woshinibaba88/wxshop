@@ -13,7 +13,17 @@ class UserController extends Controller
     * */
     public function User()
     {
-        return view("index.user");
+        $usermodel=new User();
+        $data=$usermodel->where('user_id','=',session('user_id'))->first();
+        return view("index.user",['data'=>$data]);
+    }
+    /*
+    * @退出登陆
+    * */
+    public function userdel()
+    {
+        session(["user_id"=>null]);
+        return redirect("user/login");
     }
     /*
     * @登陆

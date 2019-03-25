@@ -24,7 +24,7 @@ Route::prefix('index')->group(function () {
 });
 
 Route::any("index/indexshopcar","Index\IndexController@indexShopCar")->middleware("session");
-Route::any("index/indexuser","Index\IndexController@indexUser");
+Route::any("index/indexuser","Index\IndexController@indexUser")->middleware("session");
 Route::any("index/indexshop/{id}","Index\IndexController@indexShopId");
 Route::any("index","Index\IndexController@index");
 Route::post("index/indexshopajax","Index\IndexController@indexShopAjax");
@@ -52,7 +52,7 @@ Route::any("user/code","Index\UserController@code");
  * @短信验证码
  * */
 Route::any("user/phone","Index\UserController@phone");
-
+Route::any("user/userdel","Index\UserController@userdel");
 
 
 Route::any("user/registerdo","Index\UserController@registerDo");
@@ -62,3 +62,6 @@ Route::any("user/registerdo","Index\UserController@registerDo");
 
 Route::any("address/payment","Index\AddressController@payment");
 Route::any("address/witeaddr","Index\AddressController@witeaddr");
+Route::any("address/addressadd","Index\AddressController@addressadd");
+Route::any("address/addstatus","Index\AddressController@addstatus");
+

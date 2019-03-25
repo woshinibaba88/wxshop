@@ -19,7 +19,6 @@
     <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
     <a href="/" class="m-index-icon"><i class="m-public-icon"></i></a>
 </div>
-
 <div class="wallet-con">
     <div class="w-item">
         <ul class="w-content clearfix">
@@ -31,7 +30,7 @@
             <li>
                 <a href="">昵称</a>
                 <s class="fr"></s>
-                <span class="fr">二大爷</span>
+                <span class="fr">{{$data->user_tel}}</span>
             </li>
             <li>
                 <a href="">我的主页</a>
@@ -44,7 +43,7 @@
         </ul>
     </div>
     <div class="quit">
-        <a href="">退出登录</a>
+        <a href="{{url('user/userdel')}}">退出登录</a>
     </div>
 </div>
 

@@ -12,7 +12,7 @@
             <ul>
                 <li><img src="images/goods2.jpg" alt=""></li>
                 <li class="name">
-                    <h3>兰兰</h3>
+                    <h3>{{$data->user_tel}}</h3>
                     <p>ID：10030053</p>
                 </li>
                 <a href="{{url('user/user')}}"><li class="next fr"><s></s></li></a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Index;
 
 use App\Model\Car;
 use App\Model\Category;
+use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Goods;
@@ -140,7 +141,9 @@ class IndexController extends Controller
      * */
     public function IndexUser()
     {
-        return view("index.indexuser");
+        $usermodel=new User();
+        $data=$usermodel->where('user_id','=',session('user_id'))->first();
+        return view("index.indexuser",['data'=>$data]);
     }
     /*
      * @商品详情页
