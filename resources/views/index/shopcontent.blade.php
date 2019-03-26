@@ -209,7 +209,7 @@
 
             <div class="pro_foot">
                 <a href="" class="">第10364潮正在进行中<span class="dotting"></span></a>
-                <a href="" class="shopping">立即参与</a>
+                <a href="" id="AddCar" class="shopping">立即参与</a>
                 <span href="" class="fr"><i><b num="1">1</b></i></span>
             </div>
         </div>
@@ -282,6 +282,21 @@
         $(".tabs a").click(function(e){
             e.preventDefault()
         })
+
+            $(document).on("click","#AddCar",function(){
+                var _token=$("#_token").val();
+                var goods_id=$(this).attr("goods_id");
+                //console.log(goods_id);
+                $.post(
+                    "{{url('index/addcar')}}",
+                    {_token:_token,goods_id:goods_id},
+                    function(res){
+                        if(res==3){
+                            location.href=("{{url('user/login')}}");
+                        }
+                    }
+                )
+            })
     })
     </script>
 @endsection
