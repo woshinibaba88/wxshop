@@ -174,16 +174,12 @@ class IndexController extends Controller
      * */
     public function AddCar(Request $request)
     {
-        $user_id=session("user_id");
-        if(empty($user_id)){
-            echo json_encode(['font'=>'请登陆','code'=>3]);
-        }
         $goods_id=$request->goods_id;
         //echo $goods_id;die;
         $carmodel=new Car();
         $arr=$carmodel->where("goods_id",'=',$goods_id)->first();
         if(empty($arr)){
-            $carmodel->user_id=$user_id;
+            $carmodel->user_id=session('user_id');
             $carmodel->goods_id=$goods_id;
             $carmodel->buy_num=1;
             $res=$carmodel->save();

@@ -38,7 +38,8 @@ class UserController extends Controller
     public function Code()
     {
         $verify=new Captcha();
-        $code=$verify->getCode();
+        //$code=$verify->getCode();
+        $code='1234';
         session(['code'=>$code]);
         return $verify->doimg();
     }

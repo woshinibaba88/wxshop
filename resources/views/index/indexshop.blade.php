@@ -194,11 +194,7 @@
                         "{{url('index/addcar')}}",
                         {_token: _token, goods_id: goods_id},
                         function(res) {
-                            if(res.code==3){
-                                layer.msg(res.font, {icon: res.code},function(){location.href=("{{url('user/login')}}")});
-                            }else if(res.code==1) {
                                 layer.msg(res.font, {icon: res.code})
-                            }
                         }
                     )
                 })
