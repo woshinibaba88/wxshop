@@ -17,7 +17,7 @@ class AddressController extends Controller
     public function Address()
     {
         $addressmodel=new Address();
-        $data=$addressmodel->where("user_id",'=',session('user_id'))->get();
+        $data=$addressmodel->where(["user_id"=>session('user_id'),"address_status"=>1])->get();
         return view("address.address",['data'=>$data]);
     }
     /*
@@ -79,8 +79,9 @@ class AddressController extends Controller
     public function addstatus(Request $request)
     {
         $address_id=$request->address_id;
-        $addressmodel=new Address;
-        $find=$addressmodel->where(['address_id'=>$address_id])->first();
+        //echo $address_id;die;
+        $addressmodel=new Address();
+        $find=$addressmodel->where(['address_id'=>$address_id,'user_id'=>session("user_id")])->first();
         $find->address_default=1;
         $res=$find->save();
         if($res){
@@ -120,14 +121,17 @@ class AddressController extends Controller
         if($arr==''){
             return redirect('address');
         }
-        return view('addedit',['arr'=>$arr]);
+        return view('address.edit',['arr'=>$arr]);
     }
     /*
      * @content 编辑执行
      */
     public function addeditdo(Request $request)
     {
+//        $data=$request->all();
+//        print_r($data);die;
         $addressmodel=Address::find($request->address_id);
+        //print_r($addressmodel);die;
         $addressmodel->address_name=$request->address_name;
         $addressmodel->address_tel=$request->address_tel;
         $addressmodel->address_desc=$request->address_desc;

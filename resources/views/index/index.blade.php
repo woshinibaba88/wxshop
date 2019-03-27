@@ -204,60 +204,58 @@
 <script src="{{url('js/lazyload.min.js')}}"></script>
 <script src="{{url('js/jquery-3.1.1.min.js')}}"></script>
     <script>
-        // $(function () {
-        //     $('.hotimg').flexslider({
-        //         directionNav: false,   //是否显示左右控制按钮
-        //         controlNav: true,   //是否显示底部切换按钮
-        //         pauseOnAction: false,  //手动切换后是否继续自动轮播,继续(false),停止(true),默认true
-        //         animation: 'slide',   //淡入淡出(fade)或滑动(slide),默认fade
-        //         slideshowSpeed: 3000,  //自动轮播间隔时间(毫秒),默认5000ms
-        //         animationSpeed: 150,   //轮播效果切换时间,默认600ms
-        //         direction: 'horizontal',  //设置滑动方向:左右horizontal或者上下vertical,需设置animation: "slide",默认horizontal
-        //         randomize: false,   //是否随机幻切换
-        //         animationLoop: true   //是否循环滚动
-        //     });
-        //     setTimeout($('.flexslider img').fadeIn());
-        // });
-    </script>
-    <script>
 
-        // jQuery(document).ready(function() {
-        //     $("img.lazy").lazyload({
-        //         placeholder : "images/loading2.gif",
-        //         effect: "fadeIn",
-        //     });
-        //
-        //     // 返回顶部点击事件
-        //     $('#div_fastnav #li_menu').click(
-        //         function(){
-        //             if($('.sub-nav').css('display')=='none'){
-        //                 $('.sub-nav').css('display','block');
-        //             }else{
-        //                 $('.sub-nav').css('display','none');
-        //             }
-        //
-        //         }
-        //     )
-        //     $("#li_top").click(function(){
-        //         $('html,body').animate({scrollTop:0},300);
-        //         return false;
-        //     });
-        //
-        //     $(window).scroll(function(){
-        //         if($(window).scrollTop()>200){
-        //             $('#li_top').css('display','block');
-        //         }else{
-        //             $('#li_top').css('display','none');
-        //         }
-        //
-        //     })
-        //
-        //
-        // });
+
 
     </script>
     <script>
-        $(document).on("click","#AddCar",function(){
+        $(function(){
+            jQuery(document).ready(function() {
+                $("img.lazy").lazyload({
+                    placeholder : "images/loading2.gif",
+                    effect: "fadeIn",
+                });
+
+                // 返回顶部点击事件
+                $('#div_fastnav #li_menu').click(
+                    function(){
+                        if($('.sub-nav').css('display')=='none'){
+                            $('.sub-nav').css('display','block');
+                        }else{
+                            $('.sub-nav').css('display','none');
+                        }
+
+                    }
+                )
+                $("#li_top").click(function(){
+                    $('html,body').animate({scrollTop:0},300);
+                    return false;
+                });
+
+                $(window).scroll(function(){
+                    if($(window).scrollTop()>200){
+                        $('#li_top').css('display','block');
+                    }else{
+                        $('#li_top').css('display','none');
+                    }
+
+                })
+
+
+            });
+            $('.hotimg').flexslider({
+                    directionNav: false,   //是否显示左右控制按钮
+                    controlNav: true,   //是否显示底部切换按钮
+                    pauseOnAction: false,  //手动切换后是否继续自动轮播,继续(false),停止(true),默认true
+                    animation: 'slide',   //淡入淡出(fade)或滑动(slide),默认fade
+                    slideshowSpeed: 3000,  //自动轮播间隔时间(毫秒),默认5000ms
+                    animationSpeed: 150,   //轮播效果切换时间,默认600ms
+                    direction: 'horizontal',  //设置滑动方向:左右horizontal或者上下vertical,需设置animation: "slide",默认horizontal
+                    randomize: false,   //是否随机幻切换
+                    animationLoop: true   //是否循环滚动
+                });
+            setTimeout($('.flexslider img').fadeIn());
+            $(document).on("click","#AddCar",function(){
             var _token=$("#_token").val();
             var goods_id=$(this).attr("goods_id");
             //console.log(goods_id);
@@ -270,6 +268,7 @@
                     }
                 }
             )
+        })
         })
     </script>
 

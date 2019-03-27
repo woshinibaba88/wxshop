@@ -90,6 +90,21 @@ class IndexController extends Controller
         return view("index.shopdiv",['data'=>$data]);
     }
     /*
+     * @商品列表where
+     * */
+    public function data(Request $request)
+    {
+
+        $type=$request->data;
+        if(!empty($type)){
+            $data=DB::table("goods")->where("goods_name","like","%$type%")->get();
+        }else{
+            $data=DB::table("goods")->get();
+        }
+        //print_r($cate);die;
+        return view("index.shopdiv",['data'=>$data]);
+    }
+    /*
      *
      * */
     public function get($id)
@@ -161,7 +176,7 @@ class IndexController extends Controller
     {
         $user_id=session("user_id");
         if(empty($user_id)){
-            echo 3;die;
+            echo json_encode(['font'=>'请登陆','code'=>3]);
         }
         $goods_id=$request->goods_id;
         //echo $goods_id;die;
@@ -173,9 +188,9 @@ class IndexController extends Controller
             $carmodel->buy_num=1;
             $res=$carmodel->save();
             if($res){
-                echo "加入购物车成功";
+                echo json_encode(['font'=>'添加成功','code'=>1]);
             }else{
-                echo "加入购物车失败";
+                echo json_encode(['font'=>'添加失败','code'=>2]);
             }
         }else{
             $data=[
@@ -183,9 +198,9 @@ class IndexController extends Controller
             ];
             $res=DB::table("car")->where("goods_id","=",$goods_id)->update($data);
             if($res){
-                echo "加入购物车成功";
+                echo json_encode(['font'=>'添加成功','code'=>1]);
             }else{
-                echo "加入购物车失败";
+                echo json_encode(['font'=>'添加失败','code'=>2]);
             }
         }
     }

@@ -6,7 +6,6 @@
         <!--首页头部-->
         <div class="m-block-header">
             <a href="/" class="m-public-icon m-1yyg-icon"></a>
-            <a href="/" class="m-index-icon">编辑</a>
         </div>
         <!--首页头部 end-->
         <div class="g-Cart-list">

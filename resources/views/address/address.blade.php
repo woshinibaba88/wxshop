@@ -20,6 +20,7 @@
     <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
     <a href="{{url('address/witeaddr')}}" class="m-index-icon">添加</a>
 </div>
+<input type="hidden" id="_token" value="{{csrf_token()}}">
 <div class="addr-wrapp">
     @foreach($data as $v)
         <div class="addr-list">
@@ -39,7 +40,7 @@
                     @endif
                     <span class="status">设为默认</span>
                     <div class="fr">
-                        <a href="{{url('addedit')}}/{{$v->address_id}}"><span class="edit">编辑</span></a>
+                        <a href="{{url('address/addedit')}}/{{$v->address_id}}"><span class="edit">编辑</span></a>
                         <span class="remove">删除</span>
                     </div>
                 </li>
@@ -62,9 +63,10 @@
             var _this=$(this);
             var address_id=_this.parent('li').attr('address_id');
             var _token=$("#_token").val();
+            //console.log(_token);
             $.post(
                 "{{url('address/addstatus')}}",
-                {address_id:address_id,_token:_token},
+                {_token:_token,address_id:address_id},
                 function (res) {
                     if(res==1){
                         layer.msg("设置成功");
@@ -84,7 +86,7 @@
             layer.confirm('确认删除么', {icon: 3, title:'提示'}, function(index){
                 //do something
                 $.post(
-                    "{{url('adddel')}}",
+                    "{{url('address/adddel')}}",
                     {address_id:address_id,_token:_token},
                     function (res) {
                         if(res.code==1){

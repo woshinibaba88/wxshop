@@ -23,7 +23,7 @@
                                         <li class="P-bar01"><em>{{$v->goods_num}}</em>剩余</li>
                                     </ul>
                                 </div>
-                                <a codeid="12785750" class="" canbuy="646"><s></s></a>
+                                <a codeid="12785750" class="AddCar" canbuy="646"  goods_id="{{$v->goods_id}}"><s></s></a>
                             </div>
                         </div>
                     </li>

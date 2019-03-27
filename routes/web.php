@@ -35,6 +35,9 @@ Route::post("index/deadd","Index\IndexController@deAdd");
 Route::any("address/address","Index\AddressController@address");
 Route::post("index/del","Index\IndexController@del");
 Route::post("index/paydel","Index\IndexController@paydel");
+Route::post("index/data","Index\IndexController@data");
+
+
 Route::prefix('user')->group(function () {
     Route::any("user","Index\UserController@user");
     Route::any("login","Index\UserController@login");
@@ -64,4 +67,6 @@ Route::any("address/payment","Index\AddressController@payment");
 Route::any("address/witeaddr","Index\AddressController@witeaddr");
 Route::any("address/addressadd","Index\AddressController@addressadd");
 Route::any("address/addstatus","Index\AddressController@addstatus");
-
+Route::any("address/adddel","Index\AddressController@adddel");
+Route::any("address/addedit/{id}","Index\AddressController@addedit");
+Route::any("address/addeditdo","Index\AddressController@addeditdo");

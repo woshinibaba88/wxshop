@@ -93,7 +93,7 @@
                                                         <li class="P-bar01"><em>{{$v->goods_num}}</em>剩余</li>
                                                     </ul>
                                                 </div>
-                                                <a codeid="12785750" class="" canbuy="646" id="AddCar" goods_id="{{$v->goods_id}}"><s></s></a>
+                                                <a codeid="12785750" class="AddCar" canbuy="646"  goods_id="{{$v->goods_id}}"><s></s></a>
                                             </div>
                                         </div>
                                     </li>
@@ -120,82 +120,99 @@
 </div>
 </body>
 @endsection
+    <script src="{{url('layui/layui.js')}}"></script>
     <script src="{{url('js/jquery-3.1.1.min.js')}}"></script>
     <script>
         $(function(){
-            $(document).on('click',"#cate_id",function(){
-                var _this=$(this);
-                var cate_id=_this.attr("cate_id");
-                var _token=$("#_token").val();
-                _this.parent("li").siblings("li").removeClass("current");
-                _this.parent("li").addClass('current');
-                $.post(
-                    "{{url('index/indexshopajax')}}",
-                    {_token:_token,cate_id:cate_id},
-                    function(res){
-                        $(".good-list-inner").html(res);
-                    }
-                )
-            });
-            $(document).on('click',"#bb",function(){
-                var _this=$(this);
-                var _token=$("#_token").val();
-                _this.parent("li").siblings("li").removeClass("current");
-                _this.parent("li").addClass('current');
-                $.post(
-                    "{{url('index/indexshop')}}",
-                    {_token:_token},
-                    function(res){
-                        $("body").html(res);
-                    }
-                )
-            });
-            $(document).on('click',"#is_new",function(){
-                var _token=$("#_token").val();
-                $(this).css("color",'red');
-                $("#self_price").css("color",'');
-                $.post(
-                    "{{url('index/isnew')}}",
-                    {_token:_token},
-                    function(res){
-                        $(".good-list-inner").html(res);
-                    }
-                )
-            });
-            $(document).on('click',"#self_price",function(){
-                var _token=$("#_token").val();
-                var self_price=$(this).next().html();
-                $("#is_new").css("color",'');
-                var type='';
-                if(self_price=='↑'){
-                    type=1;
-                    $(this).next().html("↓");
-                }else{
-                    type=2;
-                    $(this).next().html("↑");
-                }
-                $(this).css("color",'red');
-                $.post(
-                    "{{url('index/price')}}",
-                    {_token:_token,type:type},
-                    function(res){
-                        $(".good-list-inner").html(res);
-                    }
-                )
-            });
-            $(document).on("click","#AddCar",function(){
-                var _token=$("#_token").val();
-                var goods_id=$(this).attr("goods_id");
-                //console.log(goods_id);
-                $.post(
-                    "{{url('index/addcar')}}",
-                    {_token:_token,goods_id:goods_id},
-                    function(res){
-                        if(res==3){
-                            location.href=("{{url('user/login')}}");
+            layui.use('layer',function () {
+                var layer=layui.layer;
+                $(document).on('click', "#cate_id", function () {
+                    var _this = $(this);
+                    var cate_id = _this.attr("cate_id");
+                    var _token = $("#_token").val();
+                    _this.parent("li").siblings("li").removeClass("current");
+                    _this.parent("li").addClass('current');
+                    $.post(
+                        "{{url('index/indexshopajax')}}",
+                        {_token: _token, cate_id: cate_id},
+                        function (res) {
+                            $(".good-list-inner").html(res);
                         }
+                    )
+                });
+                $(document).on('click', "#bb", function () {
+                    var _this = $(this);
+                    var _token = $("#_token").val();
+                    _this.parent("li").siblings("li").removeClass("current");
+                    _this.parent("li").addClass('current');
+                    $.post(
+                        "{{url('index/indexshop')}}",
+                        {_token: _token},
+                        function (res) {
+                            $("body").html(res);
+                        }
+                    )
+                });
+                $(document).on('click', "#is_new", function () {
+                    var _token = $("#_token").val();
+                    $(this).css("color", 'red');
+                    $("#self_price").css("color", '');
+                    $.post(
+                        "{{url('index/isnew')}}",
+                        {_token: _token},
+                        function (res) {
+                            $(".good-list-inner").html(res);
+                        }
+                    )
+                });
+                $(document).on('click', "#self_price", function () {
+                    var _token = $("#_token").val();
+                    var self_price = $(this).next().html();
+                    $("#is_new").css("color", '');
+                    var type = '';
+                    if (self_price == '↑') {
+                        type = 1;
+                        $(this).next().html("↓");
+                    } else {
+                        type = 2;
+                        $(this).next().html("↑");
                     }
-                )
+                    $(this).css("color", 'red');
+                    $.post(
+                        "{{url('index/price')}}",
+                        {_token: _token, type: type},
+                        function (res) {
+                            $(".good-list-inner").html(res);
+                        }
+                    )
+                });
+                $(document).on("click", ".AddCar", function () {
+                    var _token = $("#_token").val();
+                    var goods_id = $(this).attr("goods_id");
+                    //console.log(goods_id);
+                    $.post(
+                        "{{url('index/addcar')}}",
+                        {_token: _token, goods_id: goods_id},
+                        function(res) {
+                            if(res.code==3){
+                                layer.msg(res.font, {icon: res.code},function(){location.href=("{{url('user/login')}}")});
+                            }else if(res.code==1) {
+                                layer.msg(res.font, {icon: res.code})
+                            }
+                        }
+                    )
+                })
+                $(document).on("blur", "#txtSearch", function () {
+                    var _token = $("#_token").val();
+                    var data = $(this).val();
+                    $.post(
+                        "{{url('index/data')}}",
+                        {_token: _token, data: data},
+                        function (res) {
+                            $(".good-list-inner").html(res);
+                        }
+                    )
+                })
             })
         })
     </script>

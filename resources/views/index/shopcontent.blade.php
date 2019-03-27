@@ -104,7 +104,7 @@
                         <div class="part-record">
                             <div class="ann_list">
                                 <div class="fl">
-                                    <img src="images/goods2.jpg" alt="">
+                                    {{--<img src="images/goods2.jpg" alt="">--}}
                                 </div>
                                 <div class="fl">
                                     <h3>被小冉</h3>
@@ -116,7 +116,7 @@
                             </div>
                             <div class="ann_list">
                                 <div class="fl">
-                                    <img src="images/goods2.jpg" alt="">
+                                    {{--<img src="images/goods2.jpg" alt="">--}}
                                 </div>
                                 <div class="fl">
                                     <h3>被小冉</h3>
@@ -128,7 +128,7 @@
                             </div>
                             <div class="ann_list">
                                 <div class="fl">
-                                    <img src="images/goods2.jpg" alt="">
+                                    {{--<img src="images/goods2.jpg" alt="">--}}
                                 </div>
                                 <div class="fl">
                                     <h3>被小冉</h3>
@@ -140,7 +140,7 @@
                             </div>
                             <div class="ann_list">
                                 <div class="fl">
-                                    <img src="images/goods2.jpg" alt="">
+                                    {{--<img src="images/goods2.jpg" alt="">--}}
                                 </div>
                                 <div class="fl">
                                     <h3>被小冉</h3>
@@ -169,7 +169,7 @@
                             <div class="win-list clearfix">
                                 <div class="win-left fl">
                                     <p class="chao">第2779潮购</p>
-                                    <img src="images/goods2.jpg" alt="">
+                                    {{--<img src="images/goods2.jpg" alt="">--}}
                                 </div>
                                 <div class="win-right fl">
                                     <p class="show-time">揭晓时间:2017-06-28 15:16:46:000</p>
@@ -181,7 +181,7 @@
                             <div class="win-list clearfix">
                                 <div class="win-left fl">
                                     <p class="chao">第2779潮购</p>
-                                    <img src="images/goods2.jpg" alt="">
+                                    {{--<img src="images/goods2.jpg" alt="">--}}
                                 </div>
                                 <div class="win-right fl">
                                     <p class="show-time">揭晓时间: <i>2017-06-28 15:16:46:000</i></p>
@@ -206,18 +206,18 @@
                 </div>
 
             </div>
-
+            <input type="hidden" id="_token" value="{{csrf_token()}}">
             <div class="pro_foot">
                 <a href="" class="">第10364潮正在进行中<span class="dotting"></span></a>
-                <a href="" id="AddCar" class="shopping">立即参与</a>
+                <a href="#" id="AddCar" class="shopping">立即参与</a>
                 <span href="" class="fr"><i><b num="1">1</b></i></span>
             </div>
         </div>
     </div>
     </div>
     @endsection
-@section("my-js")
-    <script src="http://cdn.bootcss.com/flexslider/2.6.2/jquery.flexslider.min.js"></script>
+    <script src="{{url('js/jquery-3.1.1.min.js')}}"></script>
+    {{--<script src="http://cdn.bootcss.com/flexslider/2.6.2/jquery.flexslider.min.js"></script>--}}
     <script>
         $(function () {
         $('.hotimg').flexslider({
@@ -283,6 +283,11 @@
             e.preventDefault()
         })
 
+
+    })
+    </script>
+    <script>
+        $(function(){
             $(document).on("click","#AddCar",function(){
                 var _token=$("#_token").val();
                 var goods_id=$(this).attr("goods_id");
@@ -297,9 +302,8 @@
                     }
                 )
             })
-    })
+        })
     </script>
-@endsection
 
 
 

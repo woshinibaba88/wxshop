@@ -12,6 +12,8 @@ class Address extends Model
      * @var string
      */
     protected $table = 'address';
+    protected $primaryKey = 'address_id';
+
     /**
      * 表明模型是否应该被打上时间戳
      *
