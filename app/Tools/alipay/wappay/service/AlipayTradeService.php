@@ -6,14 +6,15 @@
  * 说明：
  * 以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
  */
-
-require_once dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'./../../AopSdk.php';
-require dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'./../../config.php';
-
+namespace App\Tools\alipay\wappay\service;
+require_once APP_PATH()."/Tools/alipay/AopSdk.php";
+config("config");
+use App\Tools\alipay\aop\request\AlipayTradeWapPayRequest;
+use App\Tools\alipay\aop\AopClient;
 class AlipayTradeService {
 
 	//支付宝网关地址
-	public $gateway_url = "https://openapi.alipay.com/gateway.do";
+	public $gateway_url = "https://openapi.alipaydev.com/gateway.do";
 
 	//支付宝公钥
 	public $alipay_public_key;

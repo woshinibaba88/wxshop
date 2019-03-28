@@ -37,7 +37,7 @@ class AddressController extends Controller
         foreach ($data as $k=>$v){
             $priceNum+=$v['self_price']*$v['buy_num'];
         }
-         //dump($priceNum);die;
+        //dump($priceNum);die;
         //return view('payment',['data'=>$data],['priceNum'=>$priceNum]);
 
         return view("shop.payment",['goodsInfo'=>$data],['priceNum'=>$priceNum]);

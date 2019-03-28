@@ -28,9 +28,9 @@
                 <span class="img fr"></span>
             </li>
             <li>
-                <a href="">昵称</a>
+                <a href="{{url('index/updname')}}">昵称</a>
                 <s class="fr"></s>
-                <span class="fr">{{$data->user_tel}}</span>
+                <span class="fr">{{$data->user_name}}</span>
             </li>
             <li>
                 <a href="">我的主页</a>
@@ -38,7 +38,11 @@
             </li>
             <li>
                 <a href="">手机号码</a>
-                <span class="fr">400-666-2110</span>
+                <span class="fr">{{$data->user_tel}}</span>
+            </li>
+            <li>
+                <a href="{{url('index/loginpwd/'.$data->user_tel)}}">修改密码</a>
+                <span class="fr">*******</span>
             </li>
         </ul>
     </div>
@@ -56,6 +60,6 @@
         <li class="f_personal"><a href="{{url('index/indexuser')}}" ><i></i>我的潮购</a></li>
     </ul>
 </div>
-<script src="js/jquery-1.11.2.min.js"></script>
+<script src="{{url('js/jquery-1.11.2.min.js')}}"></script>
 </body>
 </html>

@@ -7,10 +7,15 @@
     <a href="{{url('user/register')}}" class="orange">注册</a>
     </div>
     <div class="welcome">
-        <i class="set"></i>
+        <div style="float: right;background-color:orangered;">
+            <a href="{{url('index/set')}}" class="set"></a>
+            {{--<div id="ment" style="display: none; float: left">--}}
+                {{--<a style="font-size:5px;color: black;">修改密码</a>--}}
+            {{--</div>--}}
+        </div>
         <div class="login-img clearfix">
             <ul>
-                <li><img src="images/goods2.jpg" alt=""></li>
+                <li><img src="{{url('images/goods2.jpg')}}" alt=""></li>
                 <li class="name">
                     <h3>{{$data->user_tel}}</h3>
                     <p>ID：10030053</p>
@@ -57,8 +62,9 @@
         </ul>
     </div>
 @endsection
-@section('my-js')
+<script src="{{url('js/jquery-3.1.1.min.js')}}"></script>
     <script>
+        $(function(){
         function goClick(obj, href) {
             $(obj).empty();
             location.href = href;
@@ -66,8 +72,9 @@
         if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) != "micromessenger") {
             $(".m-block-header").show();
         }
+        })
     </script>
-@endsection
+
 
 
 

@@ -12,6 +12,7 @@ class User extends Model
      * @var string
      */
     protected $table = 'user';
+    protected $primaryKey = 'user_id';
     /**
      * 表明模型是否应该被打上时间戳
      *

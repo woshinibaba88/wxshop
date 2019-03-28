@@ -37,6 +37,12 @@ Route::post("index/del","Index\IndexController@del");
 Route::post("index/paydel","Index\IndexController@paydel");
 Route::post("index/data","Index\IndexController@data");
 
+Route::any("index/loginpwd/{id?}","Index\IndexController@loginpwd");
+Route::any("index/loginpwddo","Index\IndexController@loginpwddo");
+Route::any("index/updname","Index\IndexController@updname");
+Route::any("index/updnamedo","Index\IndexController@updnamedo");
+Route::any("index/set","Index\IndexController@set");
+Route::any("index/safeset","Index\IndexController@safeset");
 
 Route::prefix('user')->group(function () {
     Route::any("user","Index\UserController@user");
@@ -70,3 +76,8 @@ Route::any("address/addstatus","Index\AddressController@addstatus");
 Route::any("address/adddel","Index\AddressController@adddel");
 Route::any("address/addedit/{id}","Index\AddressController@addedit");
 Route::any("address/addeditdo","Index\AddressController@addeditdo");
+
+
+Route::any("alipay","Index\AlipayController@alipay");
+Route::any("return","Index\AlipayController@return");
+Route::any("notify","Index\AlipayController@notify");

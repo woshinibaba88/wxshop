@@ -230,4 +230,73 @@ class IndexController extends Controller
             }
         }
     }
+    /*
+     * @密码修改
+     * */
+    public function loginpwd($id)
+    {
+        $fid=substr($id,0,3);
+        $did=substr($id,-3);
+        $id=$fid.'*****'.$did;
+       return  view("index.loginpwd",['tel'=>$id]);
+    }
+    /*
+     * @密码修改执行
+     * */
+    public function loginpwddo(Request $request)
+    {
+        $model=new User();
+        $arr=$model->where('user_id','=',session("user_id"))->first();
+        $oldpwd=$request->oldpwd;
+        if($oldpwd!=decrypt($arr['user_pwd'])){
+            echo json_encode(['font'=>"原密码错误",'code'=>2]);
+        }else{
+            $user=User::find(session('user_id'));
+            $user->user_pwd=encrypt($request->newpwd);
+            $res=$user->save();
+            if($res){
+                echo json_encode(['font'=>"修改成功",'code'=>1]);
+            }else{
+                echo json_encode(['font'=>"修改失败",'code'=>2]);
+            }
+        }
+
+    }
+    /*
+     * @修改昵称
+     * */
+    public function updname()
+    {
+        return view("index.updname");
+    }
+    /*
+     * @昵称修改执行
+     * */
+    public function updnamedo(Request $request)
+    {
+            $user=User::find(session('user_id'));
+            $user->user_name=$request->name;
+            $res=$user->save();
+            if($res){
+                echo json_encode(['font'=>"修改成功",'code'=>1]);
+            }else{
+                echo json_encode(['font'=>"修改失败",'code'=>2]);
+            }
+    }
+    /*
+     * @设置
+     *
+     * */
+    public function set()
+    {
+        return view("index.set");
+    }
+    /*
+         * @安全设置
+         *
+         * */
+    public function safeset()
+    {
+        return view("index.safeset");
+    }
 }

@@ -5,7 +5,7 @@
       <paths name="blog">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/wwwroot/default/blog" local="$PROJECT_DIR$" web="/blog/public" />
+            <mapping deploy="/home/wwwroot/default/blog" local="$PROJECT_DIR$" web="" />
           </mappings>
         </serverdata>
       </paths>
